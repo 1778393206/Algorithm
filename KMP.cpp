@@ -45,42 +45,12 @@ int kmp(const string &s,const string &p)
     }
     return -1;// 未匹配成功，返回-1
 }
-
-vector<int> NEXT(const string &p){
-    vector<int> next(p.length(),0);
-    next[0]=-1;
-    int i=0,j=-1;
-    while(i<int(p.length())-1){
-        if(j==-1 || p[i]==p[j]){
-            i++;
-            j++;
-            if(p[i]!=p[j])
-                next[i]=j;
-            else
-                next[i]=next[j];
-        }
-        else{
-            j=next[j];
-        }
+int main()
+{
+    string a="dfdgsdgdfhsasdsa";
+    auto next=Next(a);
+    for(auto v:next){
+        printf("%2d ",v);
     }
-    return next;
-}
-
-int KMP(const string &s,const string &p){
-    auto next=NEXT(p);
-    int i=-1,j=-1;
-    while(i<(int)s.length() && j<(int)p.length()){
-        if(j==-1 || s[i]==p[j]){
-            i++;
-            j++;
-        }
-        else{
-            j=next[j];
-        }
-    }
-    if(j>=(int)p.length())
-        return i-p.length();
-    else
-        return -1;
-
+    cout<<endl;
 }
